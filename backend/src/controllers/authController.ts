@@ -88,46 +88,54 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 // Logout User
 export const logoutUser = (req: Request, res: Response) => {
   res.cookie("token", "", { expires: new Date(0) });
-  res.status(200).json({ message: "Logged out successfully" });
+  res.status(200).json({ success: true, message: "Logged out successfully" });
 };
 
 // Forgot Password
-export const forgotPassword = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const user = await User.findOne({ email: req.body.email });
+export const forgotPassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findOne({ email: req.body.email });
 
-  if (!user) {
-      throw new AppError('There is no user with that email address', 404);
-  }
+    if (!user) {
+      throw new AppError("There is no user with that email address", 404);
+    }
 
-  const resetToken = crypto.randomBytes(32).toString('hex');
-  user.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-  user.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    user.passwordResetToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+    user.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
+    await user.save({ validateBeforeSave: false });
 
-  await user.save({ validateBeforeSave: false });
-
-  const resetURL = `${req.protocol}://${req.get('host')}/api/auth/resetPassword/${resetToken}`;
-  const message = `Forgot your password? Submit a PATCH request with your new password to: ${resetURL}\nIf you didn't forget your password, please ignore this email!`;
-
-  try {
+    const resetURL = `${req.protocol}://${req.get(
+      "host"
+    )}/api/auth/resetPassword/${resetToken}`;
+    const message = `Your password reset token is :- \n\n ${resetURL} \n\nIf you have not requested this email then, please ignore it.`;
+    try {
       await sendEmail({
-          email: user.email,
-          subject: 'Your password reset token (valid for 10 minutes)',
-          message,
+        email: user.email,
+        subject: "Your password reset token (valid for 10 minutes)",
+        message,
       });
 
       res.status(200).json({
-          status: 'success',
-          message: 'Token sent to email!',
+        status: "success",
+        message: "Token sent to email!",
       });
-  } catch (err) {
+    } catch (err) {
       user.passwordResetToken = undefined;
       user.passwordResetExpires = undefined;
       await user.save({ validateBeforeSave: false });
 
-      throw new AppError('There was an error sending the email. Try again later!', 500);
+      throw new AppError(
+        "There was an error sending the email. Try again later!",
+        500
+      );
+    }
   }
-});
+);
 // // user register
 // export const register = async (req: Request, res: Response) => {
 //   try {
