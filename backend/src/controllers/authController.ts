@@ -88,7 +88,7 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 // Logout User
 export const logoutUser = (req: Request, res: Response) => {
   res.cookie("token", "", { expires: new Date(0) });
-  res.status(200).json({ success: true, message: "Logged out successfully" });
+  res.status(200).json({  message: "Logged out successfully" });
 };
 
 // Forgot Password
@@ -134,6 +134,36 @@ export const forgotPassword = asyncHandler(
         500
       );
     }
+  }
+);
+
+// Reset Password
+export const resetPassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(req.params.token)
+      .digest("hex");
+
+    const user = await User.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      throw new AppError("Token is invalid or has expired", 400);
+    }
+
+    user.password = req.body.password;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+
+    res.status(200).json({
+      status: "success",
+      message: "Password has been reset",
+      token: generateToken(String(user._id)),
+    });
   }
 );
 // // user register
