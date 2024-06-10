@@ -88,7 +88,7 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 // Logout User
 export const logoutUser = (req: Request, res: Response) => {
   res.cookie("token", "", { expires: new Date(0) });
-  res.status(200).json({  message: "Logged out successfully" });
+  res.status(200).json({ message: "Logged out successfully" });
 };
 
 // Forgot Password
