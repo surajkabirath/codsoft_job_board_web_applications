@@ -1,76 +1,48 @@
-import  { useState } from 'react';
+import React, { useState } from 'react'
+import { GiHamburgerMenu } from 'react-icons/gi';
+
+
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
+    const Links =[
+      {name:"HOME",link:"/"},
+      {name:"SERVICE",link:"/"},
+      {name:"ABOUT",link:"/"},
+      {name:"BLOG'S",link:"/"},
+      {name:"CONTACT",link:"/"},
+    ];
+    const [open,setOpen]=useState(false);
   return (
-    <nav className="bg-gray-800">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
-          {/* First Part: Logo */}
-          <div className="absolute inset-y-0 left-0 flex items-center pl-2 sm:pl-0">
-            <a href="/" className="text-white text-2xl font-bold">Logo</a>
-          </div>
-          {/* Mobile menu button */}
-          <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-          </div>
-          {/* Second Part: Navigation Links */}
-          <div className="flex-1 flex items-center justify-center">
-            <div className="hidden sm:block sm:ml-6">
-              <div className="flex space-x-4">
-                <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                <a href="/browse-job" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Browse Job</a>
-                <a href="/pages" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pages</a>
-                <a href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-              </div>
-            </div>
-          </div>
-          {/* Third Part: Login and Post Job */}
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+    <div className='shadow-md w-full fixed top-0 left-0'>
+      <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
+      <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
+      text-gray-800'>
+        <span className='text-3xl text-indigo-600 mr-1 pt-2'>
+       
+        </span>
+        Job Board
+      </div>
+      
+      <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
+     <GiHamburgerMenu/>
+      </div>
+
+      <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ':'top-[-490px]'}`}>
+        {
+          Links.map((link)=>(
+            <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'>
+              <a href={link.link} className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</a>
+            </li>
+          ))
+        }
+        <div className="">
             <a href="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
             <a href="/post-job" className="ml-4 bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Post Job</a>
           </div>
-        </div>
+      </ul>
       </div>
+    </div>
+  )
+}
 
-      {/* Mobile Sidebar */}
-      <div className={`fixed inset-0 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out bg-gray-900 sm:hidden`}>
-        <div className="absolute top-0 left-0 p-4">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          >
-            <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-          <a href="/browse-job" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Browse Job</a>
-          <a href="/pages" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pages</a>
-          <a href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-          <a href="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
-          <a href="/post-job" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Post Job</a>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-export default Navbar;
+export default Navbar
