@@ -1,12 +1,50 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { Context } from "../../main";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  const [name,setName] = useState("")
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
-  const [role,setRole] = useState("")
-  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+
+  const register = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/api/v1/user/register",
+        { name, email, role, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      toast.success(data.message);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setRole("");
+      setIsAuthorized(true);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // Handle axios-specific errors here
+        console.error(error.response?.data || error.message);
+      } else if (error instanceof Error) {
+        // Handle other errors here
+        console.error(error.message);
+      } else {
+        console.error("An unexpected error occurred");
+      }
+    }
+    if (isAuthorized) {
+      return <Navigate to={"/"} />;
+    }
+  };
   return (
     <section className="bg-gray-50 ">
       <div className="flex flex-col items-center justify-center px-6 py-8 mt-9 mx-auto md:h-screen lg:py-0">
@@ -18,6 +56,13 @@ const Register = () => {
             <form className="space-y-4 md:space-y-6" action="#">
               <div>
                 <div>
+              <select value={role} onChange={(e) => setRole(e.target.value)}>
+                  <option value="">Select Role</option>
+                  <option value="Employer">Employer</option>
+                  <option value="Job Seeker">Job Seeker</option>
+                </select>
+                </div>
+                <div>
                   <label
                     htmlFor="text"
                     className="block mb-2 text-sm font-medium text-gray-900 "
@@ -27,7 +72,8 @@ const Register = () => {
                   <input
                     type="text"
                     name="text"
-                    id="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="your name"
                     required={true}
@@ -42,7 +88,8 @@ const Register = () => {
                 <input
                   type="email"
                   name="email"
-                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="name@company.com"
                   required={true}
@@ -58,7 +105,8 @@ const Register = () => {
                 <input
                   type="password"
                   name="password"
-                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   required={true}
@@ -74,7 +122,8 @@ const Register = () => {
                 <input
                   type="confirm-password"
                   name="confirm-password"
-                  id="confirm-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   required={true}
