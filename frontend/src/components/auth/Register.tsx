@@ -1,21 +1,22 @@
 import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { Context } from "../../main";
+
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Context } from "../../context/ContextProvider";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const register = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/register",
+        "http://localhost:8000/api/auth/register",
         { name, email, role, password },
         {
           headers: {
@@ -53,14 +54,21 @@ const Register = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
               Create an account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              className="space-y-4 md:space-y-6"
+              action="#"
+              onSubmit={register}
+            >
               <div>
                 <div>
-              <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Select Role</option>
-                  <option value="Employer">Employer</option>
-                  <option value="Job Seeker">Job Seeker</option>
-                </select>
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    <option value="">Select Role</option>
+                    <option value="Employer">Employer</option>
+                    <option value="Job Seeker">Job Seeker</option>
+                  </select>
                 </div>
                 <div>
                   <label
