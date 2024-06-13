@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const Links = [
     { name: "HOME", link: "/" },
@@ -36,31 +36,29 @@ const Navbar = () => {
         >
           {Links.map((link) => (
             <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
-              <a
-                href={link.link}
+              <Link
+                to={link.link}
                 className="text-gray-800 hover:text-gray-400 duration-500"
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
-           <div className="">
-            <a
-              href="/login"
+          <div className="">
+            <Link
+              to={"/login"}
               className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
               Login
-            </a>
-            <a
-              href="/post-job"
+            </Link>
+            <Link
+              to={"/post-job"}
               className="ml-4 bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
             >
               Post Job
-            </a>
+            </Link>
           </div>
-         
         </ul>
-       
       </div>
     </div>
   );
