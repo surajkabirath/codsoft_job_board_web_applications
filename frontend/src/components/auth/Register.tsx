@@ -16,7 +16,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/auth/register",
+        "http://localhost:8000/api/auth/register",
         { name, email, role, password },
         {
           headers: {
@@ -66,8 +66,9 @@ const Register = () => {
                     onChange={(e) => setRole(e.target.value)}
                   >
                     <option value="">Select Role</option>
-                    <option value="Employer">Employer</option>
-                    <option value="Job Seeker">Job Seeker</option>
+                    <option value="admin">admin</option>
+                    <option value="employee">Employer</option>
+                    <option value="job-seeker">Job Seeker</option>
                   </select>
                 </div>
                 <div>
