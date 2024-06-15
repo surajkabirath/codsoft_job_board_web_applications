@@ -7,12 +7,13 @@ import { errorHandler } from "./middlewares/errorMiddleware";
 import cors from "cors";
 const app = express();
 app.use(express.json());
-// const corsOptions = {
-//   origin: 'http://localhost:5174', // Allow only this origin to access resources
-//   methods: ['GET', 'POST'], // Allow only GET and POST requests
-//   allowedHeaders: ['Content-Type'], // Allow only Content-Type header
-// };
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:5173", // React app URL
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allow more methods if needed
+  allowedHeaders: ["Content-Type", "Authorization"], // Allow Authorization header if using auth
+  credentials: true, // Allow cookies to be sent with requests
+};
+app.use(cors(corsOptions));
 // Use morgan to log HTTP requests if in development mode
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

@@ -35,7 +35,7 @@ import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcryptjs";
 
 interface IUser extends Document {
-  image: string;
+  // image: string;
   name: string;
   email: string;
   password: string;
@@ -48,7 +48,7 @@ interface IUser extends Document {
 
 const userSchema: Schema<IUser> = new mongoose.Schema(
   {
-    image: { type: String, required: true },
+    // image: { type: String, required: true },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

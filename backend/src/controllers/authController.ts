@@ -37,7 +37,7 @@ const sendEmail = async (option: {
 // Register User
 export const registerUser = asyncHandler(
   async (req: Request, res: Response) => {
-    const { image, name, email, password, role } = req.body;
+    const { name, email, password, role } = req.body;
 
     const userExists = await User.findOne({ email });
 
@@ -46,7 +46,7 @@ export const registerUser = asyncHandler(
     }
 
     const user = await User.create({
-      image,
+      // image,
       name,
       email,
       password,
