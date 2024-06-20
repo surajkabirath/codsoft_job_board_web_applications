@@ -60,7 +60,7 @@ const Register = () => {
                     onChange={(e) => setRole(e.target.value)}
                   >
                     <option value="">Select Role</option>
-                    <option value="admin">Admin</option>
+                   
                     <option value="employee">Employer</option>
                     <option value="job-seeker">Job Seeker</option>
                   </select>

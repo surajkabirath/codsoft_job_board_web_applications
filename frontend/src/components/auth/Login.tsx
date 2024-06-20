@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -14,7 +15,7 @@ const Login = () => {
     try {
       const { data } = await axios.post(
         "http://localhost:8000/api/auth/login",
-        { email, password },
+        { email, password,role },
         {
           headers: {
             "Content-Type": "application/json",
@@ -26,6 +27,8 @@ const Login = () => {
 
       setEmail("");
       setPassword("");
+      setRole("")
+      console.log(setRole)
 
       setIsAuthorized(true);
     } catch (error) {
@@ -49,6 +52,17 @@ const Login = () => {
               action="#"
               onSubmit={userLogin}
             >
+               <div>
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    <option value="">Select Role</option>
+                   
+                    <option value="employee">Employer</option>
+                    <option value="job-seeker">Job Seeker</option>
+                  </select>
+                </div>
               <div>
                 <label
                   htmlFor="email"
