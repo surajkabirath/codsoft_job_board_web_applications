@@ -71,15 +71,15 @@ export const registerUser = asyncHandler(
 // Login User
 export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   const { email, password } = req.body;
-
+  if ( !email || !password ) {
+    throw new AppError("Please fill all fields", 400);
+  }
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
+     message:"Logged in Successfully !!😍",
+     user,
       token: generateToken(String(user._id)),
     });
   } else {
