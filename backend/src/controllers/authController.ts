@@ -70,20 +70,28 @@ export const registerUser = asyncHandler(
 
 // Login User
 export const loginUser = asyncHandler(async (req: Request, res: Response) => {
-  const { email, password } = req.body;
-  if ( !email || !password ) {
-    throw new AppError("Please fill all fields", 400);
+  const { email, password, role } = req.body;
+  if (!email || !password || !role) {
+    throw new AppError("Please provide email ,password and role", 400);
   }
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+password");
+  if (!user) {
+    throw new AppError("Invalid email or password", 401);
+  }
+  const isMatch = await user.matchPassword(password);
+  if (!isMatch) {
+    throw new AppError("Invalid email or password", 401);
+  }
+  if (user.role !== role) {
+    throw new AppError(`User with provided email and ${role} not found!`, 404);
+  }
 
-  if (user && (await user.matchPassword(password))) {
+ else {
     res.json({
-     message:"Logged in Successfully !!😍",
-     user,
+      message: "Logged in Successfully !!😍",
+      user,
       token: generateToken(String(user._id)),
     });
-  } else {
-    throw new AppError("Invalid email or password", 401);
   }
 });
 // Logout User
