@@ -38,11 +38,14 @@ const sendEmail = async (option: {
 export const registerUser = asyncHandler(
   async (req: Request, res: Response) => {
     const { name, email, password, role } = req.body;
+    if (!name || !email || !password || !role) {
+      throw new AppError("Please fill all fields", 400);
+    }
 
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      throw new AppError("User already exists", 400);
+      throw new AppError("User Already Exists with this Email.", 400);
     }
 
     const user = await User.create({
@@ -55,10 +58,8 @@ export const registerUser = asyncHandler(
 
     if (user) {
       res.status(201).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
+        message: "register successful",
+        user,
         token: generateToken(String(user._id)),
       });
     } else {
@@ -108,7 +109,7 @@ export const forgotPassword = asyncHandler(
     user.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
     await user.save({ validateBeforeSave: false });
-
+    console.log(resetToken);
     const resetURL = `${req.protocol}://${req.get(
       "host"
     )}/api/auth/resetPassword/${resetToken}`;
