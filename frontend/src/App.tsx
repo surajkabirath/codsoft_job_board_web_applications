@@ -3,7 +3,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Navbar from "./components/layout/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { Context } from "./context/ContextProvider";
 // import axios from "axios";
@@ -30,13 +30,13 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-       
         <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer position="top-right" />
     </>
   );
 };

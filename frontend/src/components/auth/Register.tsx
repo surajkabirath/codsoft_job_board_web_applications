@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 import axios from "axios";
-import toast from "react-hot-toast";
 import { Context } from "../../context/ContextProvider";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -32,16 +32,10 @@ const Register = () => {
       setRole("");
       setIsAuthorized(true);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        // Handle axios-specific errors here
-        console.error(error.response?.data || error.message);
-      } else if (error instanceof Error) {
-        // Handle other errors here
-        console.error(error.message);
-      } else {
-        console.error("An unexpected error occurred");
-      }
+      const err = error as { response: { data: { message: string } } };
+      toast.error(err.response.data.message);
     }
+
     if (isAuthorized) {
       return <Navigate to={"/"} />;
     }
@@ -85,7 +79,6 @@ const Register = () => {
                     onChange={(e) => setName(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="your name"
-                    required={true}
                   />
                 </div>
                 <label
@@ -101,7 +94,6 @@ const Register = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="name@company.com"
-                  required={true}
                 />
               </div>
               <div>
@@ -118,26 +110,9 @@ const Register = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                  required={true}
                 />
               </div>
-              <div>
-                <label
-                  htmlFor="confirm-password"
-                  className="block mb-2 text-sm font-medium text-gray-900 "
-                >
-                  Confirm password
-                </label>
-                <input
-                  type="confirm-password"
-                  name="confirm-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                  required={true}
-                />
-              </div>
+
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
@@ -145,7 +120,6 @@ const Register = () => {
                     aria-describedby="terms"
                     type="checkbox"
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
-                    required={true}
                   />
                 </div>
                 <div className="ml-3 text-sm">
