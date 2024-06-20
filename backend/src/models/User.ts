@@ -1,39 +1,6 @@
-// import { bcrypt } from 'bcryptjs';
-// import { Schema, model, Document } from "mongoose";
-
-// interface IUser extends Document {
-//   name: string;
-//   email: string;
-//   password: string;
-//   role: string;
-// }
-
-// const userSchema = new Schema<IUser>({
-//   name: {
-//     type: String,
-//     required: true,
-//   },
-//   email: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//   },
-//   password: {
-//     type: String,
-//     required: true,
-//   },
-//   role: {
-//     type: String,
-//     enum: ["admin", "employee", "job-seeker"],
-//     default: "job-seeker",
-//   },
-// });
-
-// export const User = model<IUser>("User", userSchema);
-
 import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcryptjs";
-
+import validator from "validator";
 interface IUser extends Document {
   // image: string;
   name: string;
@@ -49,9 +16,24 @@ interface IUser extends Document {
 const userSchema: Schema<IUser> = new mongoose.Schema(
   {
     // image: { type: String, required: true },
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    name: {
+      type: String,
+      required: [true, "Please enter your Name!"],
+      minLength: [3, "Name must contain at least 3 Characters!"],
+      maxLength: [30, "Name cannot exceed 30 Characters!"],
+    },
+    email: {
+      type: String,
+      required: [true, "Please enter your Email!"],
+      validate: [validator.isEmail, "Please provide a valid Email!"],
+    },
+    password: {
+      type: String,
+      required: [true, "Please provide a Password!"],
+      minLength: [8, "Password must contain at least 6 characters!"],
+      maxLength: [32, "Password cannot exceed 32 characters!"],
+      select: false,
+    },
     role: {
       type: String,
       enum: ["admin", "employee", "job-seeker"],
