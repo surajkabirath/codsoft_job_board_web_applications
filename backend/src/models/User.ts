@@ -6,7 +6,7 @@ interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  role: "admin" | "employee" | "job-seeker";
+  role:  "employee" | "job-seeker";
   passwordResetToken?: string;
   passwordResetExpires?: Date;
   createdAt: Date;

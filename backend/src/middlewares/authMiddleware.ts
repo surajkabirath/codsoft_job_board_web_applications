@@ -14,38 +14,28 @@ interface AuthenticatedRequest extends Request {
 // Middleware to protect routes from unauthenticated users
 export const protect = asyncHandler(
   async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    let token;
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-    ) {
-      token = req.headers.authorization.split("")[1];
-    }
-    if (!token) {
-      throw new AppError("Not Authorized, no token", 401);
-    }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as Decoded;
-
-    req.user = await User.findById(decoded.id).select("-password");
-    if (!req.user) {
-      throw new AppError(
-        "The user belonging to this token does no longer exist.",
-        401
-      );
-    }
-
-    next();
+const {token } = req.cookies
+if(!token){
+  throw new AppError("User Not Authorized", 401);
+}
+const decoded = jwt.verify(token,process.env.JWT_SECRET!) as Decoded
+const user = await User.findById(decoded.id)
+if(!user){
+  throw new AppError("No user found with this id", 404);
+}
+req.user = user
+next()
   }
 );
 
-export const admin = (
-  req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  if (req.user && req.user.role === "admin") {
-    next();
-  } else {
-    throw new AppError("Not authorized as an admin", 403);
-  }
-};
+// export const admin = (
+//   req: AuthenticatedRequest,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   if (req.user && req.user.role === "admin") {
+//     next();
+//   } else {
+//     throw new AppError("Not authorized as an admin", 403);
+//   }
+// };
