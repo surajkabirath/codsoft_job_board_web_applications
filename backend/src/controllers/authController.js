@@ -84,12 +84,28 @@ export const loginUser = asyncHandler(async (req, res,next) => {
   generateToken(user, `${user.role} Logged in Successfully !!😍`, 200, res);
 });
 
-// Logout User
-export const logoutUser = (req, res) => {
-  res.cookie("token", "", { expires: new Date(0) });
-  res.status(200).json({ message: "Logged out successfully" });
-};
+// Employee logout
 
+export const logoutEmployee = asyncHandler(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("employeeToken", "", { httpOnly: true, expires: new Date(Date.now()) })
+    .json({
+      success: true,
+      message: "Employee logout successfully",
+    });
+});
+
+// job seeker logout
+export const logoutJobSeeker = asyncHandler(async(req,res,next)=>{
+  res
+    .status(200)
+    .cookie("job-seekerToken", "", { httpOnly: true, expires: new Date(Date.now()) })
+    .json({
+      success: true,
+      message: "Job Seeker logout successfully",
+    });
+})
 // Forgot Password
 export const forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
