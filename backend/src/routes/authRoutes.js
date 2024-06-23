@@ -5,7 +5,8 @@ import {
   logoutEmployee,
   forgotPassword,
   resetPassword,
-  logoutJobSeeker
+  logoutJobSeeker,
+  getUser
 } from "../controllers/authController.js";
 
 const router = Router();
@@ -16,6 +17,7 @@ router.get("/employeelogout", logoutEmployee);
 router.get("/jobseekerlogout", logoutJobSeeker);
 router.post("/forgotpassword", forgotPassword);
 router.put("/resetPassword/:token", resetPassword);
+router.get("/",getUser)
 
 export default router;
 

@@ -181,4 +181,11 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     token: generateToken(String(user._id)),
   });
 });
-
+// get all user
+export const getUser = asyncHandler((req, res, next) => {
+  const user = req.user;
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
