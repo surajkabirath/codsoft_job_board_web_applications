@@ -3,7 +3,8 @@ import User from "../models/User.js";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import AppError from "../utils/AppError.js";
-import { generateToken } from "../utils/jwtToken.js";
+import  {generateToken}  from "../utils/jwtToken.js";
+import jwt from "jsonwebtoken";
 
 // Send Email
 const sendEmail = async (options) => {
@@ -46,7 +47,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     role,
   });
 
-  generateToken(user, "User Registered Successfully !!😍", 200, res);
+  generateToken(user, 201, res, `${user.role} Registration in Successfully !!😍`);
 });
 
 // Login User
@@ -81,7 +82,8 @@ export const loginUser = asyncHandler(async (req, res,next) => {
   //   user,
   //   token: generateToken(String(user._id)),
   // });
-  generateToken(user, `${user.role} Logged in Successfully !!😍`, 200, res);
+
+  generateToken(user, 201, res, `${user.role} Logged in Successfully !!😍`);
 });
 
 // Employee logout
@@ -179,3 +181,4 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     token: generateToken(String(user._id)),
   });
 });
+

@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { getAllJobs, postJob } from "../controllers/jobController.js";
+import { getAllJobs, postJob,getMyJobs } from "../controllers/jobController.js";
 
-import {isEmployeeAuthenticated,isJobSeekerAuthenticated} from "../middlewares/authMiddleware.js"
+import {isAuthenticated} from "../middlewares/authMiddleware.js"
 const router = Router();
 
-router.get("/getall", isJobSeekerAuthenticated, getAllJobs);
-router.post("/post", isEmployeeAuthenticated, postJob);
+router.get("/getall", getAllJobs);
+router.post("/post", isAuthenticated, postJob);
+router.get("/getmyjobs", getMyJobs);
 
 export default router;

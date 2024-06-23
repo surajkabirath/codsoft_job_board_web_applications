@@ -85,3 +85,20 @@ export const postJob = asyncHandler(async (req, res, next) => {
     throw new AppError("Invalid Job data", 400);
   }
 });
+
+
+// getMyJobs
+
+export const getMyJobs = asyncHandler(async (req, res, next) => {
+  const  role  = req.user;
+  if (role === "job-seeker") {
+    return next(
+      new AppError("Job Seeker not allowed to access this resource.", 400)
+    );
+  }
+  const myJobs = await Job.find({ postedBy: req.user._id });
+  res.status(200).json({
+    success: true,
+    myJobs,
+  });
+});

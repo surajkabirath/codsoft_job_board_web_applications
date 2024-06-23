@@ -33,6 +33,7 @@ const userSchema = new Schema(
     passwordResetToken: String,
     passwordResetExpires: Date,
   },
+
   {
     timestamps: true,
   }
@@ -52,7 +53,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 userSchema.methods.generateJsonWebToken = function () {
-  return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES,
   });
    
