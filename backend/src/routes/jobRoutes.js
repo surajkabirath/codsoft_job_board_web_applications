@@ -6,6 +6,6 @@ const router = Router();
 
 router.get("/getall", getAllJobs);
 router.post("/post", isAuthenticated, postJob);
-router.get("/getmyjobs", getMyJobs);
+router.get("/getmyjobs",isAuthenticated, getMyJobs);
 
 export default router;

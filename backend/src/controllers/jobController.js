@@ -1,4 +1,3 @@
-
 import Job from "../models/Job.js"; // Adjust path as per your project structure
 
 import asyncHandler from "../utils/catchAsync.js";
@@ -12,7 +11,6 @@ export const getAllJobs = asyncHandler(async (req, res, next) => {
     jobs,
   });
 });
-
 
 // Get all jobs or jobs by a specific employee
 // export const getAllJobs = asyncHandler(async (req, res, next) => {
@@ -31,10 +29,6 @@ export const getAllJobs = asyncHandler(async (req, res, next) => {
 //     jobs,
 //   });
 // });
-
-
-
-
 
 export const postJob = asyncHandler(async (req, res, next) => {
   const { role } = req.user;
@@ -56,10 +50,14 @@ export const postJob = asyncHandler(async (req, res, next) => {
     throw new AppError("Please provide full job details.", 400);
   }
   if ((!salaryFrom || !salaryTo) && !fixedSalary) {
-    return next(new AppError("Please either provide fixed salary or ranged salary.", 400));
+    return next(
+      new AppError("Please either provide fixed salary or ranged salary.", 400)
+    );
   }
   if (salaryFrom && salaryTo && fixedSalary) {
-    return next(new AppError("Cannot Enter Fixed and Ranged Salary together.", 400));
+    return next(
+      new AppError("Cannot Enter Fixed and Ranged Salary together.", 400)
+    );
   }
 
   const postedBy = req.user._id;
@@ -85,7 +83,6 @@ export const postJob = asyncHandler(async (req, res, next) => {
     throw new AppError("Invalid Job data", 400);
   }
 });
-
 
 // getMyJobs
 
