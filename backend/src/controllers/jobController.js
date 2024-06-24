@@ -129,3 +129,24 @@ export const updateJob = asyncHandler(async (req, res, next) => {
     job, // Return updated job for verification
   });
 });
+
+
+// deleteJob
+export const deleteJob = asyncHandler(async (req, res, next) => {
+  const { role } = req.user;
+  if (role === "job-seeker") {
+    return next(
+      new AppError("Job Seeker not allowed to access this resource.", 400)
+    );
+  }
+  const { id } = req.params;
+  const job = await Job.findById(id);
+  if (!job) {
+    return next(new AppError("OOPS! Job not found.", 404));
+  }
+  await job.deleteOne();
+  res.status(200).json({
+    success: true,
+    message: "Job Deleted!",
+  });
+});
