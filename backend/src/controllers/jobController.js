@@ -84,14 +84,14 @@ export const getMyJobs = asyncHandler(async (req, res, next) => {
 
 // updatejob
 
-
-
 export const updateJob = asyncHandler(async (req, res, next) => {
   const { role } = req.user;
   // console.log(`User role: ${role}`);
 
   if (role === "job-seeker") {
-    return next(new AppError("Job Seeker not allowed to access this resource.", 400));
+    return next(
+      new AppError("Job Seeker not allowed to access this resource.", 400)
+    );
   }
 
   const { id } = req.params;
@@ -130,7 +130,6 @@ export const updateJob = asyncHandler(async (req, res, next) => {
   });
 });
 
-
 // deleteJob
 export const deleteJob = asyncHandler(async (req, res, next) => {
   const { role } = req.user;
@@ -149,4 +148,24 @@ export const deleteJob = asyncHandler(async (req, res, next) => {
     success: true,
     message: "Job Deleted!",
   });
+});
+
+// getJobById
+export const getJobById = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  // console.log("🚀 ~ getJobById ~ id:", id)
+  try {
+    const job = await Job.findById(id);
+    // console.log("🚀 ~ getJobById ~ job:", job)
+    if (!job) {
+      return next(new AppError("Job not found.", 404));
+    }
+    res.status(200).json({
+      success: true,
+      job,
+    });
+  } catch (error) {
+    // console.log("🚀 ~ getJobById ~ error:", error)
+    return next(new AppError(`Invalid ID / CastError`, 404));
+  }
 });
