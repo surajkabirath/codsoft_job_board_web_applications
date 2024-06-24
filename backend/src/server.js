@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { v2 as cloudinary } from 'cloudinary';
+import  cloudinary from 'cloudinary';
 import app from "./app.js";
 
 dotenv.config();

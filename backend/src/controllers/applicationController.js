@@ -1,8 +1,9 @@
 import asyncHandler from "../utils/catchAsync.js";
 import AppError from "../utils/AppError.js";
-
+import cloudinary  from 'cloudinary';
 import { Application } from "../models/Application.js";
-
+import Job from "../models/Job.js"
+// import  User  from "../models/User.js";
 export const postApplication = asyncHandler(async (req, res, next) => {
   const { role } = req.user;
   if (role === "employee") {
@@ -25,7 +26,8 @@ export const postApplication = asyncHandler(async (req, res, next) => {
     resume.tempFilePath
   );
 
-  if (!cloudinaryResponse || cloudinaryResponse.error) {
+
+  if (!cloudinaryResponse ) {
     console.error(
       "Cloudinary Error:",
       cloudinaryResponse.error || "Unknown Cloudinary error"
@@ -46,7 +48,7 @@ export const postApplication = asyncHandler(async (req, res, next) => {
     return next(new AppError("Job not found!", 404));
   }
 
-  const employerID = {
+  const employeeID = {
     user: jobDetails.postedBy,
     role: "employee",
   };
@@ -57,7 +59,7 @@ export const postApplication = asyncHandler(async (req, res, next) => {
     !phone ||
     !address ||
     !applicantID ||
-    !employerID ||
+    !employeeID ||
     !resume
   ) {
     return next(new AppError("Please fill all fields.", 400));
@@ -69,7 +71,7 @@ export const postApplication = asyncHandler(async (req, res, next) => {
     phone,
     address,
     applicantID,
-    employerID,
+    employeeID,
     resume: {
       public_id: cloudinaryResponse.public_id,
       url: cloudinaryResponse.secure_url,
@@ -82,60 +84,59 @@ export const postApplication = asyncHandler(async (req, res, next) => {
   });
 });
 
+
+
 // employeeGetAllApplication
-export const employeeGetAllApplication = asyncHandler(
-  async (req, res, next) => {
-    const { role } = req.user;
-    if (role === "job-seeker") {
-      return next(
-        new AppError("Job Seeker not allowed to access this resource.", 400)
-      );
-    }
-    const { _id } = req.user;
-    const applications = await Application.find({ "employeeID.user": _id });
-    res.status(200).json({
-      success: true,
-      applications,
-    });
+export const employeeGetAllApplication = asyncHandler(async (req, res, next) => {
+  const { role } = req.user;
+  if (role === "job-seeker") {
+    return next(
+      new AppError("Job Seeker not allowed to access this resource.", 400)
+    );
   }
-);
+  const { _id } = req.user;
+  const applications = await Application.find({ "employeeID.user": _id });
+  res.status(200).json({
+    success: true,
+    applications,
+  });
+});
 
 // jobSeekerGetAllApplication
-export const jobSeekerGetAllApplication = asyncHandler(
-  async (req, res, next) => {
-    const { role } = req.user;
-    if (role === "employee") {
-      return next(
-        new AppError("Employer not allowed to access this resource.", 400)
-      );
-    }
-    const { _id } = req.user;
-    const applications = await Application.find({ "applicantID.user": _id });
-    res.status(200).json({
-      success: true,
-      applications,
-    });
+export const jobSeekerGetAllApplication = asyncHandler(async (req, res, next) => {
+  const { role } = req.user;
+  if (role === "employee") {
+    return next(
+      new AppError("Employer not allowed to access this resource.", 400)
+    );
   }
-);
+  const { _id } = req.user;
+  const applications = await Application.find({ "applicantID.user": _id });
+  res.status(200).json({
+    success: true,
+    applications,
+  });
+});
+
+
 
 // jobseekerDeleteApplication
-export const jobseekerDeleteApplication = asyncHandler(
-  async (req, res, next) => {
-    const { role } = req.user;
-    if (role === "employee") {
-      return next(
-        new AppError("Employer not allowed to access this resource.", 400)
-      );
-    }
-    const { id } = req.params;
-    const application = await Application.findById(id);
-    if (!application) {
-      return next(new AppError("Application not found!", 404));
-    }
-    await application.deleteOne();
-    res.status(200).json({
-      success: true,
-      message: "Application Deleted!",
-    });
+export const jobseekerDeleteApplication = asyncHandler(async (req, res, next) => {
+  const { role } = req.user;
+  if (role === "employee") {
+    return next(
+      new AppError("Employer not allowed to access this resource.", 400)
+    );
   }
-);
+  const { id } = req.params;
+    const application = await Application.findById(id)
+  if (!application) {
+    return next(new AppError("Application not found!", 404));
+  }
+  await application.deleteOne();
+  res.status(200).json({
+    success: true,
+    message: "Application Deleted!",
+
+  })
+})
