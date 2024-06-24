@@ -45,10 +45,10 @@ const jobSchema = new mongoose.Schema({
     minLength: [4, "Salary must contain at least 4 digits"],
     maxLength: [9, "Salary cannot exceed 9 digits"],
   },
-  // expired: {
-  //   type: Boolean,
-  //   default: false,
-  // },
+  expired: {
+    type: Boolean,
+    default: false,
+  },
   jobPostedOn: {
     type: Date,
     default: Date.now,
@@ -58,12 +58,7 @@ const jobSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  // user:{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true,
-  
-  // }
+
 });
 
 const Job = mongoose.models.Job || mongoose.model('Job', jobSchema);

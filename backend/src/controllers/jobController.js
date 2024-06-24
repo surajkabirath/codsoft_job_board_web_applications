@@ -4,31 +4,13 @@ import asyncHandler from "../utils/catchAsync.js";
 import AppError from "../utils/AppError.js";
 
 export const getAllJobs = asyncHandler(async (req, res, next) => {
-  const jobs = await Job.find();
+  const jobs = await Job.find({ expired: false });
   res.status(200).json({
     success: true,
     message: "Here the list of all jobs",
     jobs,
   });
 });
-
-// Get all jobs or jobs by a specific employee
-// export const getAllJobs = asyncHandler(async (req, res, next) => {
-//   const { employeeId } = req.query;
-
-//   let jobs;
-//   if (employeeId) {
-//     jobs = await Job.find({ postedBy: employeeId });
-//   } else {
-//     jobs = await Job.find();
-//   }
-
-//   res.status(200).json({
-//     success: true,
-//     message: "Here is the list of all jobs",
-//     jobs,
-//   });
-// });
 
 export const postJob = asyncHandler(async (req, res, next) => {
   const { role } = req.user;
@@ -87,7 +69,7 @@ export const postJob = asyncHandler(async (req, res, next) => {
 // getMyJobs
 
 export const getMyJobs = asyncHandler(async (req, res, next) => {
-  const  role  = req.user;
+  const role = req.user;
   if (role === "job-seeker") {
     return next(
       new AppError("Job Seeker not allowed to access this resource.", 400)
@@ -97,5 +79,53 @@ export const getMyJobs = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     myJobs,
+  });
+});
+
+// updatejob
+
+
+
+export const updateJob = asyncHandler(async (req, res, next) => {
+  const { role } = req.user;
+  // console.log(`User role: ${role}`);
+
+  if (role === "job-seeker") {
+    return next(new AppError("Job Seeker not allowed to access this resource.", 400));
+  }
+
+  const { id } = req.params;
+  // console.log(`Job ID: ${id}`);
+
+  let job;
+  try {
+    job = await Job.findById(id);
+    // console.log(job); // Log the job details
+  } catch (error) {
+    console.error(`Error fetching job: ${error.message}`);
+    return next(new AppError("Invalid Job ID format.", 400));
+  }
+
+  if (!job) {
+    console.log(`Job not found with ID: ${id}`);
+    return next(new AppError("OOPS! Job not found.", 404));
+  }
+
+  try {
+    job = await Job.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
+    // console.log(`Updated Job: ${job}`); // Log the updated job details
+  } catch (error) {
+    console.error(`Error updating job: ${error.message}`);
+    return next(new AppError("Failed to update job. Please try again.", 500));
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Job Updated!",
+    job, // Return updated job for verification
   });
 });
