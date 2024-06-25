@@ -8,6 +8,7 @@ import {
   logoutJobSeeker,
   getUser
 } from "../controllers/authController.js";
+import {isAuthenticated} from "../middlewares/authMiddleware.js"
 
 const router = Router();
 
@@ -17,7 +18,7 @@ router.get("/employeelogout", logoutEmployee);
 router.get("/jobseekerlogout", logoutJobSeeker);
 router.post("/forgotpassword", forgotPassword);
 router.put("/resetPassword/:token", resetPassword);
-router.get("/",getUser)
+router.get("/getuser",isAuthenticated,getUser)
 
 export default router;
 
