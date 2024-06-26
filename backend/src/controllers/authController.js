@@ -3,7 +3,7 @@ import User from "../models/User.js";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import AppError from "../utils/AppError.js";
-import  {generateToken}  from "../utils/jwtToken.js";
+import { generateToken } from "../utils/jwtToken.js";
 import jwt from "jsonwebtoken";
 
 // Send Email
@@ -47,11 +47,16 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     role,
   });
 
-  generateToken(user, 201, res, `${user.role} Registration in Successfully !!😍`);
+  generateToken(
+    user,
+    201,
+    res,
+    `${user.role} Registration in Successfully !!😍`
+  );
 });
 
 // Login User
-export const loginUser = asyncHandler(async (req, res,next) => {
+export const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password, role } = req.body;
 
   if (!email || !password || !role) {
@@ -71,10 +76,9 @@ export const loginUser = asyncHandler(async (req, res,next) => {
   }
 
   if (user.role !== role) {
-    return next(new AppError(
-      `User with provided email and ${role} role not found!`,
-      404
-    ));
+    return next(
+      new AppError(`User with provided email and ${role} role not found!`, 404)
+    );
   }
 
   // res.json({
@@ -86,28 +90,19 @@ export const loginUser = asyncHandler(async (req, res,next) => {
   generateToken(user, 201, res, `${user.role} Logged in Successfully !!😍`);
 });
 
-// Employee logout
-
-export const logoutEmployee = asyncHandler(async (req, res, next) => {
+// logout
+export const logout = asyncHandler(async (req, res, next) => {
   res
-    .status(200)
-    .cookie("employeeToken", "", { httpOnly: true, expires: new Date(Date.now()) })
+    .status(201)
+    .cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    })
     .json({
       success: true,
-      message: "Employee logout successfully",
+      message: "Logged Out Successfully.",
     });
 });
-
-// job seeker logout
-export const logoutJobSeeker = asyncHandler(async(req,res,next)=>{
-  res
-    .status(200)
-    .cookie("job-seekerToken", "", { httpOnly: true, expires: new Date(Date.now()) })
-    .json({
-      success: true,
-      message: "Job Seeker logout successfully",
-    });
-})
 // Forgot Password
 export const forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
