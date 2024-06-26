@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -32,11 +32,12 @@ const Login = () => {
       setEmail("");
       setPassword("");
       setRole("");
-
+      setIsAuthorized(true);
       navigateTo("/");
     } catch (err) {
       toast.error(err.response.data.message);
     }
+      
   };
 
   const togglePasswordVisibility = () => {
@@ -47,7 +48,7 @@ const Login = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="max-w-md w-full mx-auto p-6 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-          Create An Account
+        Login to your account
         </h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>

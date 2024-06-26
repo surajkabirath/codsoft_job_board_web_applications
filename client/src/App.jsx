@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import axios from "axios"
 import { Context } from "./main";
 import "react-toastify/dist/ReactToastify.css";
+import Home from "./components/Home/Home";
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <Navbar />
+        <Home/>
         <Routes>
         <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

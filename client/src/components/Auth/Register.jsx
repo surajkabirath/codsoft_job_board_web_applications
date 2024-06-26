@@ -13,7 +13,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const {  setIsAuthorized, } = useContext(Context);
   const navigateTo = useNavigate();
 
   const handleRegister = async (e) => {
