@@ -15,10 +15,11 @@ const Register = () => {
 
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
   const navigateTo = useNavigate();
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    await axios
-      .post(
+    try {
+      const res = await axios.post(
         "http://localhost:8000/api/auth/register",
         { name, email, password, role },
         {
@@ -27,18 +28,16 @@ const Register = () => {
           },
           withCredentials: true,
         }
-      )
-      .then((res) => {
-        toast.success(res.data.message);
-        setEmail("");
-        setPassword("");
-        setRole("");
-        isAuthorized(true);
-        navigateTo("/login");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+      );
+      toast.success(res.data.message);
+      setEmail("");
+      setPassword("");
+      setRole("");
+      setIsAuthorized(true);
+      navigateTo("/login");
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -54,7 +53,7 @@ const Register = () => {
         <form className="space-y-4" onSubmit={handleRegister}>
           <div>
             <label
-              htmlFor="Name"
+              htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
               Name
@@ -121,8 +120,8 @@ const Register = () => {
               className="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-300 focus:border-blue-300 sm:text-sm"
             >
               <option value="">Select Role</option>
-              <option value="employee">employee</option>
-              <option value="jobseeker">job-seeker</option>
+              <option value="employee">Employee</option>
+              <option value="job-seeker">Job-Seeker</option>
             </select>
           </div>
           <div className="flex items-center">
