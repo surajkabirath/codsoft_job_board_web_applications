@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Context } from "../../main";
-import {toast}  from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const Login = () => {
@@ -13,30 +13,31 @@ const Login = () => {
   const [role, setRole] = useState("");
   const { isAuthorized, setIsAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
-     await axios.post(
+    try {
+      const res = await axios.post(
         "http://localhost:8000/api/auth/login",
-        { email, password, role },
+        { name, email, password, role },
         {
           headers: {
             "Content-Type": "application/json",
           },
           withCredentials: true,
         }
-      ).then((res)=>{
+      );
+      toast.success(res.data.message);
 
-        toast.success(res.data.message);
-        setEmail("");
-        setPassword("");
-        setRole("");
-        navigateTo("/")
-      }).catch((err)=>{
-        toast.error(err.response.data.message)
-      })
+      setEmail("");
+      setPassword("");
+      setRole("");
+
+      navigateTo("/");
+    } catch (err) {
+      toast.error(err.response.data.message);
     }
-
- 
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -58,11 +59,9 @@ const Login = () => {
             </label>
             <input
               type="email"
-       
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              
               className="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-300 focus:border-blue-300 sm:text-sm"
             />
           </div>
@@ -75,11 +74,9 @@ const Login = () => {
             </label>
             <input
               type={showPassword ? "text" : "password"}
-             
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
-           
               className="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-300 focus:border-blue-300 sm:text-sm"
             />
             <button
@@ -102,21 +99,18 @@ const Login = () => {
               Role
             </label>
             <select
-           
               value={role}
               onChange={(e) => setRole(e.target.value)}
               className="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-300 focus:border-blue-300 sm:text-sm"
-            
             >
               <option value="">Select Role</option>
               <option value="employee">employee</option>
-              <option value="jobseeker">job-eeker</option>
+              <option value="job-seeker">job-seeker</option>
             </select>
           </div>
           <div className="flex items-center">
             <input
               type="checkbox"
-           
               checked={termsAccepted}
               onChange={(e) => setTermsAccepted(e.target.checked)}
               className="h-4 w-4 text-blue-600 focus:ring-blue-300 border-gray-300 rounded"
