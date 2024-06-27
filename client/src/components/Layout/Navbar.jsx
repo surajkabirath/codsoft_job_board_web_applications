@@ -4,13 +4,12 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Context } from '../../main';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Profile from '../Auth/Profile';
 
 const Navbar = () => {
   const navigateTo = useNavigate();
   const { isAuthorized, setIsAuthorized } = useContext(Context);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
-  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -26,26 +25,9 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    closeDropdowns();
   };
 
-  const toggleAboutDropdown = () => {
-    setIsAboutDropdownOpen(!isAboutDropdownOpen);
-    setIsServicesDropdownOpen(false); // Close services dropdown
-  };
-
-  const toggleServicesDropdown = () => {
-    setIsServicesDropdownOpen(!isServicesDropdownOpen);
-    setIsAboutDropdownOpen(false); // Close about dropdown
-  };
-
-  const closeDropdowns = () => {
-    setIsAboutDropdownOpen(false);
-    setIsServicesDropdownOpen(false);
-  };
-
-  const closeDropdownsAndToggleMenu = () => {
-    closeDropdowns();
+  const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
@@ -69,15 +51,9 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex md:order-2 space-x-3 rtl:space-x-reverse">
           {isAuthorized ? (
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-            >
-              Logout
-            </button>
+            <Profile handleLogout={handleLogout} />
           ) : (
-            <NavLink to="/login">
+            <NavLink to={"/login"}>
               <button
                 type="button"
                 className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
@@ -96,55 +72,22 @@ const Navbar = () => {
         <div className={`items-center justify-between ${isMenuOpen ? 'block' : 'hidden'} w-full md:flex md:w-auto md:order-1`}>
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
             <li>
-              <Link to="#" onClick={closeDropdownsAndToggleMenu} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0" aria-current="page">
+              <Link to={"/"} onClick={closeMenu} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0" aria-current="page">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="#" onClick={closeDropdownsAndToggleMenu} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
+              <Link to={"/job/getall"} onClick={closeMenu} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
                 Browse Job
               </Link>
             </li>
-            <li className="relative">
-              <Link to="#" onClick={toggleAboutDropdown} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
-                Pages
-              </Link>
-              {isAboutDropdownOpen && (
-                <ul className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2">
-                  <li>
-                    <Link to="#" className="block py-2 px-4 text-gray-700 hover:bg-gray-100">
-                      Our Team
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="block py-2 px-4 text-gray-700 hover:bg-gray-100">
-                      Our Story
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-            <li className="relative">
-              <Link to="#" onClick={toggleServicesDropdown} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
+            <li>
+              <Link to={"/blog"} onClick={closeMenu} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
                 Blog
               </Link>
-              {isServicesDropdownOpen && (
-                <ul className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2">
-                  <li>
-                    <Link to="#" className="block py-2 px-4 text-gray-700 hover:bg-gray-100">
-                      Consulting
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="block py-2 px-4 text-gray-700 hover:bg-gray-100">
-                      Development
-                    </Link>
-                  </li>
-                </ul>
-              )}
             </li>
             <li>
-              <Link to="#" onClick={closeDropdownsAndToggleMenu} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
+              <Link to={"/contact"} onClick={closeMenu} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
                 Contact
               </Link>
             </li>
@@ -156,11 +99,11 @@ const Navbar = () => {
             {isAuthorized ? (
               <li className="md:hidden mt-2">
                 <button type="button" onClick={handleLogout} className="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center">
-                  Logout
+                  Sign out
                 </button>
               </li>
             ) : (
-              <NavLink to="/login">
+              <NavLink to={"/login"}>
                 <li className="md:hidden mt-2">
                   <button type="button" className="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center">
                     Login

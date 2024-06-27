@@ -11,7 +11,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [role, setRole] = useState("");
-  const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const {  setIsAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
   const handleLogin = async (e) => {
