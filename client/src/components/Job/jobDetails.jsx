@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
@@ -21,40 +22,42 @@ const JobDetails = () => {
       .catch(() => {
         navigateTo("/notfound");
       });
-  }, []);
+  }, [id, navigateTo]);
 
-  if (!isAuthorized) {
-    navigateTo("/login");
-  }
+  useEffect(() => {
+    if (!isAuthorized) {
+      navigateTo("/login");
+    }
+  }, [isAuthorized, navigateTo]);
 
   return (
-    <section className="flex justify-center items-center w-full bg-gray-400">
-      <div className="flex justify-center items-center">
-        <h3 className="text-gray-800 ">Job Details</h3>
-        <div>
-          <p>
-            Title: <span> {job.title}</span>
+    <section className="px-4 sm:px-6 lg:px-8 py-8 bg-gray-100 min-h-screen">
+      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h3 className="text-2xl font-bold mb-4 text-gray-800">Job Details</h3>
+        <div className="space-y-4">
+          <p className="text-lg">
+            <strong>Title:</strong> <span>{job.title}</span>
           </p>
-          <p>
-            Category: <span>{job.category}</span>
+          <p className="text-lg">
+            <strong>Category:</strong> <span>{job.category}</span>
           </p>
-          <p>
-            Country: <span>{job.country}</span>
+          <p className="text-lg">
+            <strong>Country:</strong> <span>{job.country}</span>
           </p>
-          <p>
-            City: <span>{job.city}</span>
+          <p className="text-lg">
+            <strong>City:</strong> <span>{job.city}</span>
           </p>
-          <p>
-            Location: <span>{job.location}</span>
+          <p className="text-lg">
+            <strong>Location:</strong> <span>{job.location}</span>
           </p>
-          <p>
-            Description: <span>{job.description}</span>
+          <p className="text-lg">
+            <strong>Description:</strong> <span>{job.description}</span>
           </p>
-          <p>
-            Job Posted On: <span>{job.jobPostedOn}</span>
+          <p className="text-lg">
+            <strong>Job Posted On:</strong> <span>{job.jobPostedOn}</span>
           </p>
-          <p>
-            Salary:{" "}
+          <p className="text-lg">
+            <strong>Salary:</strong>{" "}
             {job.fixedSalary ? (
               <span>{job.fixedSalary}</span>
             ) : (
@@ -63,10 +66,13 @@ const JobDetails = () => {
               </span>
             )}
           </p>
-          {user && user.role === "Employer" ? (
-            <></>
-          ) : (
-            <Link to={`/application/${job._id}`}>Apply Now</Link>
+          {user && user.role !== "employee" && (
+            <Link
+              to={`/application/${job._id}`}
+              className="inline-block w-full sm:w-auto px-6 py-2 text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+            >
+              Apply Now
+            </Link>
           )}
         </div>
       </div>

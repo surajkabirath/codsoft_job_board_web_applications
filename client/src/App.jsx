@@ -1,26 +1,23 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import Navbar from "./components/Layout/Navbar";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
-
 import { ToastContainer } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home/Home";
 import FAQ from "./components/Home/FAQ";
 import Footer from "./components/Layout/Footer";
 import Job from "./components/Job/Job";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Context } from "./main";
-
-// import { useContext } from "react";
-// import { Context } from "./main";
-
-
+import JobDetails from "./components/Job/jobDetails";
+import NotFound from "./components/NotFound/NotFound";
+import PropTypes from "prop-types";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -37,32 +34,53 @@ const App = () => {
       }
     };
     fetchUser();
-  }, [isAuthorized,]);
+  }, [isAuthorized]);
 
   return (
     <>
       <BrowserRouter>
-        <Navbar />
-       
-        <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/job/getall" element={<Job />} />
-          {/* <Route
-            path="/"
-            element={isAuthorized ? <Home /> : <Navigate to="/login" />}
-          /> */}
-          
-        </Routes>
-        <Job/>
-        <FAQ/>
-        <Footer />
-        {/* {isAuthorized && <Footer />} */}
+        <ContentVisibilityWrapper>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/job/getall" element={<Job />} />
+            <Route path="/job/:id" element={<JobDetails />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/404" />} />
+          </Routes>
+        </ContentVisibilityWrapper>
       </BrowserRouter>
       <ToastContainer position="top-right" />
     </>
   );
+};
+
+const ContentVisibilityWrapper = ({ children }) => {
+  const location = useLocation();
+  const [showContent, setShowContent] = useState(true);
+
+  useEffect(() => {
+    // Hide all pages if the current path is the NotFound page
+    if (location.pathname === "/404") {
+      setShowContent(false);
+    } else {
+      setShowContent(true);
+    }
+  }, [location.pathname]);
+
+  return (
+    <>
+      {showContent && <Navbar />}
+      {children}
+      {showContent && <FAQ />}
+      {showContent && <Footer />}
+    </>
+  );
+};
+
+ContentVisibilityWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default App;
