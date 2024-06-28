@@ -15,6 +15,10 @@ import JobDetails from "./components/Job/jobDetails";
 import NotFound from "./components/NotFound/NotFound";
 import PropTypes from "prop-types";
 import PostJob from "./components/Job/PostJob";
+import MyJobs from "./components/Job/MyJobs";
+import Application from "./components/Application/Application";
+
+
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -48,6 +52,8 @@ const App = () => {
             <Route path="/job/getall" element={<Job />} />
             <Route path="/job/:id" element={<JobDetails />} />
             <Route path="/job/post" element={<PostJob />} />
+            <Route path="/job/me" element={<MyJobs />} />
+            <Route path="/application/:id" element={<Application />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
@@ -63,7 +69,7 @@ const ContentVisibilityWrapper = ({ children }) => {
   const [showContent, setShowContent] = useState(true);
 
   useEffect(() => {
-    // Hide all pages if the current path is the NotFound page
+   
     if (location.pathname === "/404") {
       setShowContent(false);
     } else {
