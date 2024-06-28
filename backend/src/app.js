@@ -10,8 +10,8 @@ import fileUpload from "express-fileupload";
 import dotenv from "dotenv";
 
 const app = express();
-dotenv.config();
 
+dotenv.config();
 
 const corsOptions = {
   origin: [process.env.FRONTEND_URL],
@@ -20,7 +20,6 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
-
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

@@ -18,6 +18,7 @@ export const postJob = asyncHandler(async (req, res, next) => {
     throw new AppError("Job Seeker not allowed to access this resource.", 400);
   }
   const {
+    company,
     title,
     description,
     category,
@@ -28,7 +29,7 @@ export const postJob = asyncHandler(async (req, res, next) => {
     salaryFrom,
     salaryTo,
   } = req.body;
-  if (!title || !description || !category || !country || !city || !location) {
+  if (!company || !title || !description || !category || !country || !city || !location) {
     throw new AppError("Please provide full job details.", 400);
   }
   if ((!salaryFrom || !salaryTo) && !fixedSalary) {
@@ -44,6 +45,7 @@ export const postJob = asyncHandler(async (req, res, next) => {
 
   const postedBy = req.user._id;
   const job = await Job.create({
+    company,
     title,
     description,
     category,

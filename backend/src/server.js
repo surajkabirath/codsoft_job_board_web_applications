@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-
+import dotenv from "dotenv";
 import  cloudinary from 'cloudinary';
 import app from "./app.js";
 
-
+dotenv.config();
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLIENT_NAME,
   api_key: process.env.CLOUDINARY_CLIENT_API,
