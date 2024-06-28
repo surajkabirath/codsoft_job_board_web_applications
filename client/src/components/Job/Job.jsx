@@ -39,7 +39,7 @@ const Job = () => {
               <div key={job._id} className="bg-white rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105">
                 <h2 className="text-2xl font-semibold mb-3 text-blue-600">{job.title}</h2>
                 <p className="text-gray-600 mb-2"><span className="font-semibold">Category:</span> {job.category}</p>
-                <p className="text-gray-600 mb-4"><span className="font-semibold">Location:</span> {job.country}</p>
+                <p className="text-gray-600 mb-4"><span className="font-semibold">Location:</span> {job.location}</p>
                 <div className="flex justify-end">
                   <Link to={`/job/${job._id}`} className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Job Details</Link>
                 </div>

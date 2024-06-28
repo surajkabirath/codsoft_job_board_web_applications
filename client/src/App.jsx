@@ -14,6 +14,7 @@ import { Context } from "./main";
 import JobDetails from "./components/Job/jobDetails";
 import NotFound from "./components/NotFound/NotFound";
 import PropTypes from "prop-types";
+import PostJob from "./components/Job/PostJob";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/job/getall" element={<Job />} />
             <Route path="/job/:id" element={<JobDetails />} />
+            <Route path="/job/post" element={<PostJob />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
