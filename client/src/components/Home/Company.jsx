@@ -45,7 +45,7 @@ const PopularCompanies = () => {
         <div className="flex flex-wrap -m-4 justify-center">
           {companies.map(company => (
             <div key={company.id} className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg text-center">
+              <div className="border-2 border-gray-300 px-4 py-6 rounded-lg text-center">
                 {company.icon}
                 <h2 className="title-font font-medium text-3xl text-gray-900">{company.title}</h2>
                 <p className="text-gray-500">{company.location}</p>

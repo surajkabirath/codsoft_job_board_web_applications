@@ -14,7 +14,7 @@ const Profile = ({ handleLogout }) => {
   return (
     <div className="relative">
       <div
-        className="w-10 h-10 rounded-full cursor-pointer bg-gray-800 text-white items-center justify-center flex"
+        className="w-10 h-10 rounded-full cursor-pointer bg-white  text-black items-center justify-center flex"
         type="button"
         data-dropdown-toggle="userDropdown"
         data-dropdown-placement="bottom-start"
@@ -38,22 +38,30 @@ const Profile = ({ handleLogout }) => {
           className="py-2 text-sm text-gray-700"
           aria-labelledby="avatarButton"
         >
-          <li>
-            <NavLink to={"dashboard"} className="block px-4 py-2 hover:bg-gray-100">
-              Dashboard
+          {user && user.role ==="job-seeker"?( <li>
+            <NavLink  to="/applications/me" className="block px-4 py-2 hover:bg-gray-100">
+              My Jobs
             </NavLink>
-          </li>
-          <li>
-            <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-              Settings
-            </a>
-          </li>
+          </li>):(
+            <>
+             <NavLink  to="/job/me" className="block px-4 py-2 hover:bg-gray-100">
+             View All Jobs
+            </NavLink>
+            <NavLink  to="/applications/me" className="block px-4 py-2 hover:bg-gray-100">
+              Applicant Job
+            </NavLink>
+            </>
+             
+            
+          )}
+         
+         
         </ul>
         <button
           onClick={handleLogout}
           className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
         >
-          Sign out
+          Logout
         </button>
       </div>
     </div>

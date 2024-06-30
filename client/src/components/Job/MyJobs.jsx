@@ -3,6 +3,7 @@ import { Context } from "../../main";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
+import jobCategoryData from "./jobCategoryData";
 
 const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
@@ -78,7 +79,7 @@ const MyJobs = () => {
 
   return (
     <div className="bg-white border-4 rounded-lg shadow relative max-w-screen-xl mx-auto">
-      <div className="flex justify-center items-center p-5 border-b rounded-t mt-12">
+      <div className="flex justify-center items-center p-5 border-b rounded-t mt-20">
         <h3 className="text-xl font-semibold">Your Posted Jobs</h3>
       </div>
 
@@ -153,34 +154,12 @@ const MyJobs = () => {
                       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                       disabled={editingMode !== element._id}
                     >
-                      <option value="Graphics & Design">
-                        Graphics & Design
-                      </option>
-                      <option value="Mobile App Development">
-                        Mobile App Development
-                      </option>
-                      <option value="Frontend Web Development">
-                        Frontend Web Development
-                      </option>
-                      <option value="MERN Stack Development">
-                        MERN STACK Development
-                      </option>
-                      <option value="Account & Finance">
-                        Account & Finance
-                      </option>
-                      <option value="Artificial Intelligence">
-                        Artificial Intelligence
-                      </option>
-                      <option value="Video Animation">Video Animation</option>
-                      <option value="MEAN Stack Development">
-                        MEAN STACK Development
-                      </option>
-                      <option value="MEVN Stack Development">
-                        MEVN STACK Development
-                      </option>
-                      <option value="Data Entry Operator">
-                        Data Entry Operator
-                      </option>
+                      {jobCategoryData.map((cat, index) => (
+                        <option key={index} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                      
                     </select>
                   </div>
 
@@ -329,5 +308,3 @@ const MyJobs = () => {
 };
 
 export default MyJobs;
-
-

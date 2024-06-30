@@ -1,4 +1,4 @@
-import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
@@ -8,9 +8,17 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <NavLink to={"/"} className="flex items-center">
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                JOBBOARD
-              </span>
+            <span className="relative flex items-center">
+          <span className="text-2xl font-bold text-white relative z-10">
+            JOB
+          </span>
+          <span className="text-2xl font-bold text-white relative z-10">
+            IFY
+          </span>
+          <span className="absolute left-1/2 transform -translate-x-1/2">
+            <FaSearch className="text-7xl text-[#1AA7C5] z-1 ml-3  " />
+          </span>
+        </span>
             </NavLink>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -103,14 +111,14 @@ const Footer = () => {
               href="https://www.facebook.com/suraj.kabirath"
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
             >
-              <FaFacebook className="w-4 h-4" />
+              <FaFacebook className="w-4 h-4 text-indigo-500" />
               <span className="sr-only">Facebook page</span>
             </a>
             <a
               href="https://www.instagram.com/surajkabirath__/"
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
             >
-              <FaInstagram className="w-4 h-4" />
+              <FaInstagram className="w-4 h-4 text-indigo-500" />
               <span className="sr-only">Instagram page</span>
             </a>
 
@@ -118,14 +126,14 @@ const Footer = () => {
               href="https://github.com/surajkabirath"
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
             >
-              <FaGithub className="w-4 h-4" />
+              <FaGithub className="w-4 h-4 text-indigo-500" />
               <span className="sr-only">GitHub account</span>
             </a>
             <a
               href="https://www.linkedin.com/in/suraj-kabirath-b46b0225b/"
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
             >
-              <FaLinkedin className="w-4 h-4" />
+              <FaLinkedin className="w-4 h-4 text-indigo-500 " />
               <span className="sr-only">Linkedin account</span>
             </a>
           </div>

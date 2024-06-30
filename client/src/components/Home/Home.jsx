@@ -2,10 +2,20 @@
 
 import { FaSearch } from "react-icons/fa";
 import AboutCompany from "./AboutCompany";
+import About from "./About";
+import PopularCompanies from "./Company";
+import HowItWorksSection from "./HowItWork";
+import PopularCategory from "./PopularCategory";
+import Team from "./Team";
+import FAQ from "./FAQ";
+import Contact from "./Contact";
+import Blog from "./Blog";
 
 
 const Home = () => {
   return (
+    <>
+  
     <section className="body-font text-gray-600 bg-gray-200">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center px-4 py-24 md:flex-row">
         <div className="mb-16 flex flex-col items-center text-center md:mb-0 md:w-1/2 md:items-start md:pr-16 md:text-left lg:flex-grow lg:pr-24">
@@ -35,7 +45,7 @@ const Home = () => {
                   type="search"
                   id="search-dropdown"
                   className="block p-2.5 w-full lg:p-4 lg:text-lg z-20 text-sm text-gray-900 bg-gray-50 rounded-b-lg sm:rounded-b-none sm:rounded-r-lg border-t-0 sm:border-t border-l-0 sm:border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Search Mockups, Logos, Design Templates..."
+                  placeholder="Search job category......"
                   required
                 />
                 <button
@@ -60,6 +70,16 @@ const Home = () => {
       </div>
       <AboutCompany/>
     </section>
+    <About/>
+    <PopularCompanies/>
+    <HowItWorksSection/>
+    <PopularCategory/>
+    <Blog/>
+    <Team/>
+
+    <FAQ/>
+    <Contact/>
+    </>
   );
 };
 

@@ -55,13 +55,16 @@ const Application = () => {
     }
   };
 
-  if (!isAuthorized || (user && user.role === "Employer")) {
+  if (!isAuthorized || (user && user.role === "employee")) {
     navigateTo("/");
   }
   return (
     <div className="bg-white  border-4 rounded-lg shadow relative max-w-screen-xl mx-auto">
-      <div className="flex justify-center items-center p-5 border-b rounded-t mt-12">
-        <h3 className="text-xl font-semibold">Application Form</h3>
+      
+      <div className="flex justify-center items-center p-5 border-b rounded-t mt-20">
+      <h2 className="text-g4 animate__animated animate__flash my-1 font-bold text-indigo-600 text-3xl title-font mb-12 text-center flex justify-center items-center">
+        Application
+      </h2>
       </div>
 
       <div className="p-6 space-y-6">
@@ -79,7 +82,7 @@ const Application = () => {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="Enter Your Name"
               />
             </div>
@@ -95,7 +98,7 @@ const Application = () => {
                 name="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="Enter your Email"
               />
             </div>
@@ -111,7 +114,7 @@ const Application = () => {
                 type="number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="phone number"
               />
             </div>
@@ -127,7 +130,7 @@ const Application = () => {
                 name="address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="Enter your address"
               />
             </div>
@@ -144,7 +147,7 @@ const Application = () => {
                 accept=".pdf, .jpg, .png"
                 
                 onChange={handleFileChange}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
               />
             </div>
           </div>
@@ -160,14 +163,14 @@ const Application = () => {
               rows="6"
               value={coverLetter}
               onChange={(e) => setCoverLetter(e.target.value)}
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-6000 focus:border-indigo-600 block w-full p-4"
               placeholder="cover letter...."
             />
           </div>
           <div className="p-6 border-t border-gray-200 rounded-b">
             <button
               type="submit"
-              className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="text-white bg-indigo-600 hover:indigo-600  focus:ring-indigo-600 focus:border-indigo-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Send Application
             </button>

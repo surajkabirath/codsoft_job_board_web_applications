@@ -5,7 +5,6 @@ import Login from "./components/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home/Home";
-import FAQ from "./components/Home/FAQ";
 import Footer from "./components/Layout/Footer";
 import Job from "./components/Job/Job";
 import { useContext, useEffect, useState } from "react";
@@ -18,9 +17,9 @@ import PostJob from "./components/Job/PostJob";
 import MyJobs from "./components/Job/MyJobs";
 import Application from "./components/Application/Application";
 import MyApplications from "./components/Application/MyApplication";
-import DashBoard from "./components/Dashboard/Dashbord";
-import HowItWork from "./components/Home/HowItWork";
-import PopularCompanies from "./components/Home/Company";
+
+
+
 
 
 
@@ -61,8 +60,8 @@ const App = () => {
             <Route path="/job/me" element={<MyJobs />} />
             <Route path="/application/:id" element={<Application />} />
             <Route path="/applications/me" element={<MyApplications />} />
-            <Route path="dashboard" element={<DashBoard />} />
             <Route path="/404" element={<NotFound />} />
+            
             <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
         </ContentVisibilityWrapper>
@@ -90,10 +89,9 @@ const ContentVisibilityWrapper = ({ children }) => {
       {showContent && <Navbar />}
       {children}
      
-      {showContent && <PopularCompanies/>}
-      {showContent && <HowItWork/>}
-      {showContent && <FAQ />}
+    
       {showContent && <Footer />}
+    
     </>
   );
 };
