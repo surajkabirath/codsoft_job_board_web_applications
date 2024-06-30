@@ -16,7 +16,7 @@ const MyJobs = () => {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8000/api/job/getmyjobs",
+          "https://codsoft-job-board-web-applications-backend.vercel.app/api/job/getmyjobs",
           { withCredentials: true }
         );
         setMyJobs(data.myJobs);
@@ -43,7 +43,7 @@ const MyJobs = () => {
   const handleUpdateJob = async (jobId) => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
-      .put(`http://localhost:8000/api/job/update/${jobId}`, updatedJob, {
+      .put(`https://codsoft-job-board-web-applications-backend.vercel.app/api/job/update/${jobId}`, updatedJob, {
         withCredentials: true,
       })
       .then((res) => {
@@ -57,7 +57,7 @@ const MyJobs = () => {
 
   const handleDeleteJob = async (jobId) => {
     await axios
-      .delete(`http://localhost:8000/api/job/delete/${jobId}`, {
+      .delete(`https://codsoft-job-board-web-applications-backend.vercel.app/api/job/delete/${jobId}`, {
         withCredentials: true,
       })
       .then((res) => {

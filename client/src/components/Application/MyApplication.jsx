@@ -17,8 +17,8 @@ const MyApplications = () => {
       try {
         const endpoint =
           user && user.role === "employee"
-            ? "http://localhost:8000/api/application/employee/getall"
-            : "http://localhost:8000/api/application/jobseeker/getall";
+            ? "https://codsoft-job-board-web-applications-backend.vercel.app/api/application/employee/getall"
+            : "https://codsoft-job-board-web-applications-backend.vercel.app/api/application/jobseeker/getall";
 
         const res = await axios.get(endpoint, { withCredentials: true });
         setApplications(res.data.applications);
@@ -40,7 +40,7 @@ const MyApplications = () => {
   const deleteApplication = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/application/delete/${id}`,
+        `https://codsoft-job-board-web-applications-backend.vercel.app/api/application/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(res.data.message);

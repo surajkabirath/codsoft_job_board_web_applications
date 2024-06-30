@@ -35,7 +35,7 @@ const PostJob = () => {
     }
     await axios
       .post(
-        "http://localhost:8000/api/job/post",
+        "https://codsoft-job-board-web-applications-backend.vercel.app/api/job/post",
         fixedSalary.length >= 4
           ? {
             company,

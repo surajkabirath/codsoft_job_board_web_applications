@@ -20,7 +20,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/register",
+        "https://codsoft-job-board-web-applications-backend.vercel.app/api/auth/register",
         { name, email, password, role },
         {
           headers: {

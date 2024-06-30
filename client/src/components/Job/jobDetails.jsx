@@ -14,7 +14,7 @@ const JobDetails = () => {
   useEffect(() => {
     // console.log("Fetched ID:", id);
     axios
-      .get(`http://localhost:8000/api/job/singlejob/${id}`, {
+      .get(`https://codsoft-job-board-web-applications-backend.vercel.app/api/job/singlejob/${id}`, {
         withCredentials: true,
       })
       .then((res) => {

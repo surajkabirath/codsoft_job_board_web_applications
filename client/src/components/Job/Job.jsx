@@ -17,7 +17,7 @@ const Job = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/job/getall", {
+        const res = await axios.get("https://codsoft-job-board-web-applications-backend.vercel.app/api/job/getall", {
           withCredentials: true,
         });
         setJobs(res.data.jobs);

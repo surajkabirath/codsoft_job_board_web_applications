@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/auth/logout",
+        "https://codsoft-job-board-web-applications-backend.vercel.app/api/auth/logout",
         { withCredentials: true }
       );
       toast.success(response.data.message);
