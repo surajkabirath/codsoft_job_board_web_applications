@@ -17,6 +17,12 @@ import PropTypes from "prop-types";
 import PostJob from "./components/Job/PostJob";
 import MyJobs from "./components/Job/MyJobs";
 import Application from "./components/Application/Application";
+import MyApplications from "./components/Application/MyApplication";
+import DashBoard from "./components/Dashboard/Dashbord";
+import HowItWork from "./components/Home/HowItWork";
+import PopularCompanies from "./components/Home/Company";
+
+
 
 
 
@@ -54,6 +60,8 @@ const App = () => {
             <Route path="/job/post" element={<PostJob />} />
             <Route path="/job/me" element={<MyJobs />} />
             <Route path="/application/:id" element={<Application />} />
+            <Route path="/applications/me" element={<MyApplications />} />
+            <Route path="dashboard" element={<DashBoard />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
@@ -81,6 +89,9 @@ const ContentVisibilityWrapper = ({ children }) => {
     <>
       {showContent && <Navbar />}
       {children}
+     
+      {showContent && <PopularCompanies/>}
+      {showContent && <HowItWork/>}
       {showContent && <FAQ />}
       {showContent && <Footer />}
     </>

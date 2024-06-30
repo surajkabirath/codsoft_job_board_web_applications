@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../../main";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Profile = ({ handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ const Profile = ({ handleLogout }) => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
+  const userInitial = user?.name ? user.name[0].toUpperCase() : "?";
   return (
     <div className="relative">
       <div
@@ -20,7 +20,7 @@ const Profile = ({ handleLogout }) => {
         data-dropdown-placement="bottom-start"
         onClick={toggleDropdown}
       >
-        {user.name[0].toUpperCase()}
+       {userInitial}
       </div>
 
       {/* Dropdown menu */}
@@ -38,31 +38,22 @@ const Profile = ({ handleLogout }) => {
           className="py-2 text-sm text-gray-700"
           aria-labelledby="avatarButton"
         >
-          {user && user.role === "employee" ? (
-            <>
-              <li>
-                <NavLink
-                to={"/job/me"}
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  Dashboard
-                </NavLink>
-              </li>
-            </>
-          ) : (
-            <></>
-          )}
-
+          <li>
+            <NavLink to={"dashboard"} className="block px-4 py-2 hover:bg-gray-100">
+              Dashboard
+            </NavLink>
+          </li>
           <li>
             <a href="#" className="block px-4 py-2 hover:bg-gray-100">
               Settings
             </a>
           </li>
         </ul>
-        <button onClick={handleLogout} className="py-1 w-full text-left">
-          <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-            Sign out
-          </a>
+        <button
+          onClick={handleLogout}
+          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          Sign out
         </button>
       </div>
     </div>
