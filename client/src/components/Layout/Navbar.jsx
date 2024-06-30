@@ -1,4 +1,3 @@
-
 import { useContext, useState } from "react";
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -51,17 +50,20 @@ const Navbar = () => {
   return (
     <nav className=" fixed w-full z-20 py-1 top-0 start-0 border-b border-gray-200 bg-gray-800">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <span className="relative flex items-center">
-          <span className="text-2xl font-bold text-white relative z-10">
-            JOB
+        <NavLink to={"/"}>
+          <span className="relative flex items-center">
+            <span className="text-2xl font-bold text-white relative z-10">
+              JOB
+            </span>
+            <span className="text-2xl font-bold text-white relative z-10">
+              IFY
+            </span>
+            <span className="absolute left-1/2 transform -translate-x-1/2">
+              <FaSearch className="text-7xl text-[#0DA088] z-1 ml-3  " />
+            </span>
           </span>
-          <span className="text-2xl font-bold text-white relative z-10">
-            IFY
-          </span>
-          <span className="absolute left-1/2 transform -translate-x-1/2">
-            <FaSearch className="text-7xl text-[#1AA7C5] z-1 ml-3  " />
-          </span>
-        </span>
+        </NavLink>
+
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           {user && user.role === "employee" ? (
             <>
@@ -120,39 +122,48 @@ const Navbar = () => {
               <NavLink
                 to={"/"}
                 onClick={closeMenu}
-                className="block py-2 px-3 text-xl text-white bg-blue-700 rounded md:bg-transparent md: md:p-0"
+                className="block py-2 px-3 text-xl text-white  rounded md:text-gray-300 md: md:p-0"
                 aria-current="page"
               >
                 Home
               </NavLink>
             </li>
             <li>
-              <Link
-                href="about"
-                id="about"
+              <a
+                href="#about"
                 onClick={closeMenu}
-                className="block py-2 px-3 text-xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
+                className="block py-2 px-3 text-xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-300 md:p-0"
               >
                 About
-              </Link>
+              </a>
             </li>
             <li>
               <Link
                 to={"/job/getall"}
                 onClick={handleBrowseJobClick}
-                className="block py-2 px-3 text-xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
+                className="block py-2 px-3 text-xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-300 md:p-0"
               >
                 Browse Job
               </Link>
             </li>
             <li>
-              <Link
-                href="#"
+              <a
+                href="#blog"
                 onClick={closeMenu}
-                className="block py-2 px-3 text-xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
+                className="block py-2 px-3 text-xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-300 md:p-0"
               >
                 Blog
-              </Link>
+              </a>
+            </li>
+            <li>
+              {" "}
+              <a
+                href="#contact"
+                onClick={closeMenu}
+                className="block py-2 px-3 text-xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-300 md:p-0"
+              >
+                Contact
+              </a>
             </li>
           </ul>
         </div>

@@ -5,42 +5,42 @@ const blogPosts = [
   {
     category: 'Job Search Tips',
     title: 'The Catalyzer',
-    imageSrc: 'https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+    imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX2oZUFn9RnGiauV0WN5JIQXwjxoP-qNbHhw&s',
     description: 'Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.',
     learnMoreLink: '#'
   },
   {
     category: 'Industry Insights',
     title: 'The Innovator',
-    imageSrc: 'https://images.unsplash.com/photo-1624628639856-100bf817fd35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8M2QlMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60',
+    imageSrc: 'https://etimg.etb2bimg.com/photo/99614008.cms',
     description: 'Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.',
     learnMoreLink: '#'
   },
   {
     category: 'Career Development',
     title: 'The Navigator',
-    imageSrc: 'https://images.unsplash.com/photo-1631700611307-37dbcb89ef7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
+    imageSrc: 'https://img.freepik.com/premium-vector/career-development-vector-illustration-with-ladder-success-growing-revenue-improve-bar-graph-business-goal-flat-background-design_2175-20601.jpg',
     description: 'Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.',
     learnMoreLink: '#'
   },
   {
     category: 'Tech Trends',
     title: 'The Pioneer',
-    imageSrc: 'https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+    imageSrc: 'https://imageio.forbes.com/specials-images/imageserve/65c9c44ac205195ae02e22ec/The-Biggest-Technology-Trends-In-The-Next-10-Years/960x0.jpg?format=jpg&width=960',
     description: 'Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.',
     learnMoreLink: '#'
   },
   {
     category: 'Startup Insights',
     title: 'The Visionary',
-    imageSrc: 'https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+    imageSrc: 'https://t4.ftcdn.net/jpg/02/38/40/55/360_F_238405533_yyX4K55OmH2LiM7LQ01ITn6kl0b6J6K8.jpg',
     description: 'Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.',
     learnMoreLink: '#'
   },
   {
     category: 'Remote Work',
     title: 'The Nomad',
-    imageSrc: 'https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+    imageSrc: 'https://www.achurchconsulting.com/wp-content/uploads/2021/02/remote-work-models.png',
     description: 'Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.',
     learnMoreLink: '#'
   }
@@ -48,7 +48,7 @@ const blogPosts = [
 
 const Blog = () => {
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font" id="blog">
       <div className="max-w-screen-xl  px-5 py-24 mx-auto">
       <h2 className="text-g4 animate__animated animate__flash my-1 font-bold text-indigo-600 text-3xl title-font mb-12 text-center flex justify-center items-center">
        Some Blog

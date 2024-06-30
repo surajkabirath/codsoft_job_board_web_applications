@@ -126,7 +126,7 @@ const MyApplications = () => {
                   {user && user.role === "job-seeker" && (
                     <div className="flex mt-4">
                       <button
-                        className="ml-auto flex rounded border-0 bg-red-600 px-6 py-2 text-white hover:bg-indigo-600 focus:outline-none"
+                        className="ml-auto flex rounded border-0 bg-red-600 px-6 py-2 text-white hover:bg-red-400 focus:outline-none"
                         onClick={() => deleteApplication(application._id)}
                       >
                         Delete Application

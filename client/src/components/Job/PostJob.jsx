@@ -89,7 +89,7 @@ const PostJob = () => {
   }
   return (
     <div className="bg-white  border-4 rounded-lg shadow relative max-w-screen-xl mx-auto">
-      <div className="flex justify-center items-center p-5 border-b rounded-t mt-12">
+      <div className="flex justify-center items-center p-5 border-b rounded-t mt-20">
         <h3 className="text-xl font-semibold">Post New Job</h3>
       </div>
 
@@ -109,7 +109,7 @@ const PostJob = () => {
                 name="company"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="Company Mame"
               />
             </div>
@@ -125,7 +125,7 @@ const PostJob = () => {
                 name="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="Job Title"
               />
             </div>
@@ -140,7 +140,7 @@ const PostJob = () => {
                 name="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
               >
                  <option value="">Select Category</option>
         {jobCategoryData.map((cat, index) => (
@@ -162,7 +162,7 @@ const PostJob = () => {
                 name="country"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="Country"
               />
             </div>
@@ -178,7 +178,7 @@ const PostJob = () => {
                 name="city"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="City"
               />
             </div>
@@ -194,7 +194,7 @@ const PostJob = () => {
                 name="location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 placeholder="Location"
               />
             </div>
@@ -211,7 +211,7 @@ const PostJob = () => {
                 name="salaryType"
                 value={salaryType}
                 onChange={(e) => setSalaryType(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
               >
                 <option value="default">Select Salary Type</option>
                 <option value="Fixed Salary">Fixed Salary</option>
@@ -225,7 +225,7 @@ const PostJob = () => {
                   placeholder="Enter Fixed Salary"
                   value={fixedSalary}
                   onChange={(e) => setFixedSalary(e.target.value)}
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                 />
               ) : salaryType === "Ranged Salary" ? (
                 <div className="grid grid-cols-2 gap-4">
@@ -234,14 +234,14 @@ const PostJob = () => {
                     placeholder="Salary From"
                     value={salaryFrom}
                     onChange={(e) => setSalaryFrom(e.target.value)}
-                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                   />
                   <input
                     type="number"
                     placeholder="Salary To"
                     value={salaryTo}
                     onChange={(e) => setSalaryTo(e.target.value)}
-                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                   />
                 </div>
               ) : (
@@ -260,14 +260,14 @@ const PostJob = () => {
               rows="6"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-4"
               placeholder="Job Description"
             />
           </div>
           <div className="p-6 border-t border-gray-200 rounded-b">
             <button
               type="submit"
-              className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="text-white bg-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Create Job
             </button>

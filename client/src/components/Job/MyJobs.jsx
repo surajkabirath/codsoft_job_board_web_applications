@@ -99,7 +99,7 @@ const MyJobs = () => {
                       onChange={(e) =>
                         handleInputChange(element._id, "title", e.target.value)
                       }
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                       disabled={editingMode !== element._id}
                     />
                   </div>
@@ -118,7 +118,7 @@ const MyJobs = () => {
                           e.target.value
                         )
                       }
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                       disabled={editingMode !== element._id}
                     />
                   </div>
@@ -133,7 +133,7 @@ const MyJobs = () => {
                       onChange={(e) =>
                         handleInputChange(element._id, "city", e.target.value)
                       }
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                       disabled={editingMode !== element._id}
                     />
                   </div>
@@ -151,7 +151,7 @@ const MyJobs = () => {
                           e.target.value
                         )
                       }
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                       disabled={editingMode !== element._id}
                     >
                       {jobCategoryData.map((cat, index) => (
@@ -178,7 +178,7 @@ const MyJobs = () => {
                             e.target.value
                           )
                         }
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                         disabled={editingMode !== element._id}
                       />
                     ) : (
@@ -193,7 +193,7 @@ const MyJobs = () => {
                               e.target.value
                             )
                           }
-                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                           disabled={editingMode !== element._id}
                         />
                         <input
@@ -206,7 +206,7 @@ const MyJobs = () => {
                               e.target.value
                             )
                           }
-                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                           disabled={editingMode !== element._id}
                         />
                       </div>
@@ -226,7 +226,7 @@ const MyJobs = () => {
                           e.target.value
                         )
                       }
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                       disabled={editingMode !== element._id}
                     >
                       <option value={true}>TRUE</option>
@@ -248,7 +248,7 @@ const MyJobs = () => {
                           e.target.value
                         )
                       }
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-4"
                       disabled={editingMode !== element._id}
                     />
                   </div>
@@ -259,7 +259,7 @@ const MyJobs = () => {
                     <>
                       <button
                         onClick={() => handleUpdateJob(element._id)}
-                        className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        className="text-white bg-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                       >
                         {/* <FaCheck className="inline-block mr-1" /> */}
                         Save
@@ -282,7 +282,7 @@ const MyJobs = () => {
                     <>
                       <button
                         onClick={() => handleEnableEdit(element._id)}
-                        className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        className="text-white bg-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                       >
                         Edit
                       </button>

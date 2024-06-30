@@ -16,7 +16,7 @@ const Footer = () => {
             IFY
           </span>
           <span className="absolute left-1/2 transform -translate-x-1/2">
-            <FaSearch className="text-7xl text-[#1AA7C5] z-1 ml-3  " />
+            <FaSearch className="text-7xl text-[#0DA088] z-1 ml-3  " />
           </span>
         </span>
             </NavLink>

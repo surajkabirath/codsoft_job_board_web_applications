@@ -7,27 +7,27 @@ const teamMembers = [
   {
     name: "Suraj Kabirath",
     role: "CTO",
-    image: "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+    image: "https://i.ibb.co/hZLDTyM/13-184.jpg",
   },
   {
     name: "Suraj Kabirath",
     role: "Founder",
-    image: "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+    image: "https://i.ibb.co/hZLDTyM/13-184.jpg",
   },
   {
     name: "Sanjit Baruwal",
     role: "DevOps",
-    image: "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+    image: "https://baruwalsanjit.com.np/static/media/sanjit.d56b23616975f41335f4.JPG",
   },
   {
     name: "Sagar Tandan",
     role: "Software Engineer",
-    image: "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+    image: "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png",
   },
   {
     name: "Rajeev Yadav",
     role: "UX Researcher",
-    image: "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7AR5iFpr7tkS-WPgmKJ-sh9T110WhV5k4Kg&s",
   },
   
 ];

@@ -1,6 +1,6 @@
 
 
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
 import AboutCompany from "./AboutCompany";
 import About from "./About";
 import PopularCompanies from "./Company";
@@ -26,12 +26,12 @@ const Home = () => {
                Your Goals
             </span>
           </h1>
-          <p className="mb-8 leading-relaxed text-gray-800">
+          <p className="mb-8 leading-relaxed text-gray-900 body-font">
             Connecting talented individuals with top employers in various
             industries. 2400 Peoples are daily search in this portal, 100 user
             added job portal!
           </p>
-          <form className="w-full max-w-screen-xl mx-auto">
+          {/* <form className="w-full max-w-screen-xl mx-auto">
             <div className="flex flex-col sm:flex-row w-full">
               <label
                 htmlFor="search-dropdown"
@@ -57,7 +57,7 @@ const Home = () => {
                 </button>
               </div>
             </div>
-          </form>
+          </form> */}
         </div>
         <div className="w-full md:w-2/3 lg:w-3/4 lg:max-w-2xl">
           <img
