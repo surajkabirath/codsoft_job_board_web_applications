@@ -14,7 +14,7 @@ const app = express();
 dotenv.config();
 
 const corsOptions = {
-  origin: ["https://codsoft-job-board-web-applications-frontend.vercel.app"],
+  origin: [process.env.FRONTEND_URL],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -34,9 +34,7 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
-app.get("/",(req,res)=>{
-  res.send("Welcome to Codsoft Job Board API")
-})
+
 app.use("/api/auth", authRoutes);
 app.use("/api/job", jobRoutes);
 app.use("/api/application", applicationRoutes);
