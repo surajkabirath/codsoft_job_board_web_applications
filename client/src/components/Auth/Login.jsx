@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://codsoft-job-board-web-applications-backend.vercel.app/api/auth/login",
+        "http://localhost:8000/api/auth/login",
         {  email, password, role },
         {
           headers: {

@@ -32,7 +32,7 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "https://codsoft-job-board-web-applications-backend.vercel.app/api/auth/getuser",
+          "http://localhost:8000/api/auth/getuser",
           {
             withCredentials: true,
           }

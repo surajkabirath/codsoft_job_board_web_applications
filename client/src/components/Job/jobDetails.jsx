@@ -14,7 +14,7 @@ const JobDetails = () => {
   useEffect(() => {
     // console.log("Fetched ID:", id);
     axios
-      .get(`https://codsoft-job-board-web-applications-backend.vercel.app/api/job/singlejob/${id}`, {
+      .get(`http://localhost:8000/api/job/singlejob/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -80,8 +80,8 @@ const JobDetails = () => {
               ) : (
                 <div className="mb-6 flex border-b border-t border-gray-200 py-2">
                   <span className="text-gray-500">Salary</span>
-                  <span className="ml-auto text-gray-900">
-                    {job.salaryFrom} - {job.salaryTo}
+                  <span className="ml-auto text-gray-900"> $
+                    {job.salaryFrom} - ${job.salaryTo}
                   </span>
                 </div>
               )}

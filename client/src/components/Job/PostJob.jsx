@@ -25,7 +25,7 @@ const PostJob = () => {
     e.preventDefault();
     if (salaryType == "Fixed Salary") {
       setSalaryFrom("");
-      setSalaryTo("");
+      setSalaryFrom("");
     } else if (salaryType == "Ranged Salary") {
       setFixedSalary("");
     } else {
@@ -35,7 +35,7 @@ const PostJob = () => {
     }
     await axios
       .post(
-        "https://codsoft-job-board-web-applications-backend.vercel.app/api/job/post",
+        "http://localhost:8000/api/job/post",
         fixedSalary.length >= 4
           ? {
             company,
